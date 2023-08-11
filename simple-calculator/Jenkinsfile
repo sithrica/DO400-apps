@@ -24,6 +24,7 @@ stage('Check Style') {
 }
 }
 }
+}
 post {
         failure {
             sendFailureAlert('team@example.com')
@@ -35,7 +36,7 @@ post {
     }
 
 }
-}
+
     
 void sendNotification(String action, String email) {
     mail to: "${email}",
