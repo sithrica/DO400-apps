@@ -5,7 +5,7 @@ pipeline {
         string(name: 'DEPLOY_TAG', description: 'Deploy to Tag')
     }
     stages {
-     when { expression { params.DEPLOY_TAG == '' } } 
+     when { expression { params.DEPLOY_TAG == '' } }
         stage('Test') {
            options { timeout(time: 50, unit: 'SECONDS') }
             steps {
@@ -37,14 +37,14 @@ stage('Deploy') {
 def TAG_TO_DEPLOY = "BUILD-$BUILD_NUMBER"
 if (params.DEPLOY_TAG != '' && params.DEPLOY_TAG != null) {
 def status = sh(
-                        script: "./scripts/tag-exists-in-quay.sh $QUAY_USR/do400-recover ${params.DEPLOY_TAG}",     
+                        script: "./scripts/tag-exists-in-quay.sh $QUAY_USR/do400-recover ${params.DEPLOY_TAG}",
                     returnStatus: true
                 )
                 if (status != 0) {
                     error("Tag not found in Quay!")
                 }
             }
-TAG_TO_DEPLOY = params.DEPLOY_TAG        
+TAG_TO_DEPLOY = params.DEPLOY_TAG
 }
 sh """
                     ./scripts/deploy-image.sh \
@@ -52,6 +52,7 @@ sh """
                     -n $APP_NAMESPACE \
                     -t $TAG_TO_DEPLOY
                 """
+}
 }
 }
 }
