@@ -17,6 +17,12 @@ sendNotification('started', 'team@example.com')
             }
         }
 }
+post {
+        always {
+            sendNotification('finished', 'team@example.com')
+        }
+    }
+
 }
     
 void sendNotification(String action, String email) {
