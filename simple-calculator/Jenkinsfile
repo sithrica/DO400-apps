@@ -35,6 +35,7 @@ post {
     }
 
 }
+}
     
 void sendNotification(String action, String email) {
     mail to: "${email}",
